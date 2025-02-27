@@ -1,0 +1,107 @@
+Company,Ticker,GICS Sector,GICS Sub-Industry
+Adobe Inc.,ADBE,Information Technology,Application Software
+ADP,ADP,Industrials,Human Resource & Employment Services
+Alphabet Inc. (Class A),GOOGL,Communication Services,Interactive Media & Services
+Alphabet Inc. (Class C),GOOG,Communication Services,Interactive Media & Services
+Amazon,AMZN,Consumer Discretionary,Broadline Retail
+Advanced Micro Devices Inc.,AMD,Information Technology,Semiconductors
+American Electric Power,AEP,Utilities,Electric Utilities
+Amgen,AMGN,Health Care,Biotechnology
+Analog Devices,ADI,Information Technology,Semiconductors
+Ansys,ANSS,Information Technology,Application Software
+Apple Inc.,AAPL,Information Technology,"Technology Hardware, Storage & Peripherals"
+Applied Materials,AMAT,Information Technology,Semiconductor Equipment
+ASML Holding,ASML,Information Technology,Semiconductor Equipment
+Atlassian,TEAM,Information Technology,Application Software
+Autodesk,ADSK,Information Technology,Application Software
+Biogen,BIIB,Health Care,Biotechnology
+Booking Holdings,BKNG,Consumer Discretionary,"Hotels, Resorts & Cruise Lines"
+Broadcom Inc.,AVGO,Information Technology,Semiconductors
+Cadence Design Systems,CDNS,Information Technology,Application Software
+Charter Communications,CHTR,Communication Services,Cable & Satellite
+Cintas,CTAS,Industrials,Diversified Support Services
+Cisco,CSCO,Information Technology,Communications Equipment
+Cognizant,CTSH,Information Technology,IT Consulting & Other Services
+Comcast,CMCSA,Communication Services,Cable & Satellite
+Copart,CPRT,Industrials,Diversified Support Services
+CSX Corporation,CSX,Industrials,Rail Transportation
+DexCom,DXCM,Health Care,Health Care Equipment
+Dollar Tree,DLTR,Consumer Staples,Consumer Staples Merchandise Retail
+Exelon,EXC,Utilities,Electric Utilities
+Fortinet,FTNT,Information Technology,Systems Software
+Gilead Sciences,GILD,Health Care,Biotechnology
+Honeywell,HON,Industrials,Industrial Conglomerates
+Idexx Laboratories,IDXX,Health Care,Health Care Equipment
+Intel,INTC,Information Technology,Semiconductors
+Intuitive Surgical,ISRG,Health Care,Health Care Equipment
+Keurig Dr Pepper,KDP,Consumer Staples,Soft Drinks & Non-alcoholic Beverages
+KLA Corporation,KLAC,Information Technology,Semiconductor Equipment
+Kraft Heinz,KHC,Consumer Staples,Packaged Foods & Meats
+Lam Research,LRCX,Information Technology,Semiconductor Equipment
+Lululemon,LULU,Consumer Discretionary,"Apparel, Accessories & Luxury Goods"
+Marriott International,MAR,Consumer Discretionary,"Hotels, Resorts & Cruise Lines"
+Marvell Technology,MRVL,Information Technology,Application Software
+MercadoLibre,MELI,Consumer Discretionary,Broadline Retail
+Meta Platforms,META,Communication Services,Interactive Media & Services
+Microchip Technology,MCHP,Information Technology,Semiconductors
+Micron Technology,MU,Information Technology,Semiconductors
+Microsoft,MSFT,Information Technology,Systems Software
+Mondelz International,MDLZ,Consumer Staples,Packaged Foods & Meats
+Monster Beverage,MNST,Consumer Staples,Soft Drinks & Non-alcoholic Beverages
+Netflix,NFLX,Communication Services,Movies & Entertainment
+Nvidia,NVDA,Information Technology,Semiconductors
+NXP Semiconductors,NXPI,Information Technology,Semiconductors
+O'Reilly Automotive,ORLY,Consumer Discretionary,Automotive Retail
+Paccar,PCAR,Industrials,Construction Machinery & Heavy Transportation Equipment
+Palo Alto Networks,PANW,Information Technology,Systems Software
+Paychex,PAYX,Industrials,Human Resource & Employment Services
+PayPal,PYPL,Financials,Transaction & Payment Processing Services
+PDD Holdings,PDD,Consumer Discretionary,Broadline Retail
+PepsiCo,PEP,Consumer Staples,Soft Drinks & Non-alcoholic Beverages
+Qualcomm,QCOM,Information Technology,Semiconductors
+Regeneron,REGN,Health Care,Biotechnology
+Ross Stores,ROST,Consumer Discretionary,Apparel Retail
+Starbucks,SBUX,Consumer Discretionary,Restaurants
+Synopsys,SNPS,Information Technology,Application Software
+Take-Two Interactive,TTWO,Communication Services,Interactive Home Entertainment
+T-Mobile US,TMUS,Communication Services,Wireless Telecommunication Services
+"Tesla, Inc.",TSLA,Consumer Discretionary,Automobile Manufacturers
+Texas Instruments,TXN,Information Technology,Semiconductors
+The Trade Desk,TTD,Communication Services,Advertising
+Verisk,VRSK,Industrials,Research & Consulting Services
+Vertex Pharmaceuticals,VRTX,Health Care,Biotechnology
+Walgreens Boots Alliance,WBA,Consumer Staples,Drug Retail
+"Workday, Inc.",WDAY,Information Technology,Application Software
+Xcel Energy,XEL,Utilities,Multi-Utilities
+Zscaler,ZS,Information Technology,Application Software
+Okta Class A,OKTA,Information Technology,
+Baidu Inc,BIDU,Communication Services,
+Docusign,DOCU,Information Technology,
+Match Group,MTCH,Communication Services,
+Netease ADR,NTES,Communication Services,
+Skyworks Solutions,SWKS,Information Technology,
+Verisign,VRSN,Information Technology,
+Align Technology,ALGN,Health Care,
+Ebay,EBAY,Consumer Discretionary,
+Enphase Energy,ENPH,Information Technology,
+JD.Com Inc,JD,Consumer Discretionary,
+Ulta Beauty,ULTA,Consumer Discretionary,
+Trip.com Group Ltd,TCOM,Consumer Discretionary,
+CDW,CDW,Information Technology,
+Incyte,INCY,Health Care,
+Check Point Software Technologies,CHKP,Information Technology,
+AstraZeneca PLC,AZN,Health Care,
+Willis Towers Watson,WTW,Financials,
+American Airlines Group,AAL,Industrials,
+United Airlines Holdings,UAL,Industrials,
+Biomarin Pharmaceutical,BMRN,Health Care,
+Expedia Group,EXPE,Consumer Discretionary,
+Liberty Global Class A,LBTYA,Communication Services,
+Aurinia Pharmaceuticals,AUPH,Health Care,
+Blackberry,BB,Information Technology,
+Ideanomics,IDEX,Industrials,
+NIO Inc. ,NIO,Consumer Discretionary,
+Ocugen,OCGN,Health Care,
+Virgin Galactic Holdings Inc,SPCE,Industrials,
+Xwell,XWEL,Consumer Discretionary,
+Zomedica,ZOM,Health Care,

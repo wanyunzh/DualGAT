@@ -1,0 +1,63 @@
+Sector,Symbol,Company
+Basic Materials,BHP,BHP Group Limited
+Basic Materials,RIO,Rio Tinto Group
+Basic Materials,SHW,The Sherwin-Williams Company
+Basic Materials,VALE,Vale S.A.
+Basic Materials,APD,"Air Products and Chemicals, Inc."
+Financial Services,V,Visa Inc.
+Financial Services,JPM,JPMorgan Chase & Co.
+Financial Services,MA,Mastercard Inc.
+Financial Services,BAC,Bank of America Corporation
+Consumer Defensive,WMT,Walmart Inc.
+Consumer Defensive,PG,The Procter & Gamble Company
+Consumer Defensive,KO,The Coca-Cola Company
+Consumer Defensive,PEP,"PepsiCo, Inc."
+Consumer Defensive,COST,Costco Wholesale Corporation
+Utilities,NEE,"NextEra Energy, Inc."
+Utilities,DUK,Duke Energy Corporation
+Utilities,SO,The Southern Company
+Utilities,D,"Dominion Energy, Inc."
+Utilities,AEP,"American Electric Power Company, Inc."
+Energy,XOM,Exxon Mobil Corporation
+Energy,CVX,Chevron Corporation
+Energy,SHEL,Shell plc
+Energy,TTE,TotalEnergies SE
+Energy,COP,ConocoPhillips
+Technology,AAPL,Apple Inc.
+Technology,MSFT,Microsoft Corporation
+Technology,TSM,Taiwan Semiconductor Manufacturing Company Limited
+Technology,NVDA,NVIDIA Corporation
+Technology,AVGO,Broadcom Inc.
+Consumer Cyclical,AMZN,"Amazon.com, Inc."
+Consumer Cyclical,TSLA,"Tesla, Inc."
+Consumer Cyclical,HD,"The Home Depot, Inc."
+Consumer Cyclical,BABA,Alibaba Group Holding Limited
+Consumer Cyclical,TM,Toyota Motor Corporation
+Real Estate,AMT,American Tower Corporation
+Real Estate,PLD,"Prologis, Inc."
+Real Estate,CCI,Crown Castle Inc.
+Real Estate,EQIX,"Equinix, Inc."
+Real Estate,PSA,Public Storage
+Healthcare,UNH,UnitedHealth Group Incorporated
+Healthcare,JNJ,Johnson & Johnson
+Healthcare,LLY,Eli Lilly and Company
+Healthcare,PFE,Pfizer Inc.
+Healthcare,ABBV,AbbVie Inc.
+Communication Services,GOOG,Alphabet Inc.
+Communication Services,META,"Meta Platforms, Inc."
+Communication Services,VZ,Verizon Communications Inc.
+Communication Services,CMCSA,Comcast Corporation
+Communication Services,DIS,The Walt Disney Company
+Industrials,UPS,"United Parcel Service, Inc."
+Industrials,UNP,Union Pacific Corporation
+Industrials,HON,Honeywell International Inc.
+Industrials,LMT,Lockheed Martin Corporation
+Industrials,CAT,Caterpillar Inc.
+Healthcare,AUPH,Aurinia Pharmaceuticals
+Technology,BB,Blackberry
+Industrials,IDEX,Ideanomics
+Consumer Cyclical,NIO,NIO Inc. 
+Healthcare,OCGN,Ocugen
+Industrials,SPCE,Virgin Galactic Holdings Inc
+Consumer Cyclical,XWEL,Xwell
+Healthcare,ZOM,Zomedica

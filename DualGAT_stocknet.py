@@ -41,25 +41,24 @@ set_seed(1)
 
 
 
-stock_df1 = pd.read_csv('industry_sp500.csv')
+stock_df1 = pd.read_csv('stocktable_new.csv')
 stock_list = stock_df1['Symbol'].tolist()
-stock_list.remove('FRC')
 
 
 
-stock_sector = pd.read_csv(r'industry_sp500_new.csv', encoding='latin1')[['Symbol', 'INDUSTRY_GICS']]
+stock_sector = pd.read_csv(r'stocktable_new.csv', encoding='latin1')[['Symbol', 'Sector']]
 #let stock_sector only contain the stock in stock_list
 stock_sector = stock_sector[stock_sector['Symbol'].isin(stock_list)]
 sector2num = {}
 num = 0
-for i in stock_sector['INDUSTRY_GICS']:
+for i in stock_sector['Sector']:
     if i not in sector2num.keys():
         sector2num[i] = num
         num += 1
 dict_sector = {}
 for index, item in stock_sector.iterrows():
     ticker = item['Symbol']
-    sector = sector2num[item['INDUSTRY_GICS']]
+    sector = sector2num[item['Sector']]
     if ticker not in dict_sector.keys():
         dict_sector[ticker] = sector
 
@@ -76,7 +75,7 @@ df_valid.columns = ['datetime', 'stock', 'valid_value']
 valid_label = valid_label.stack().reset_index()
 valid_label.columns = ['datetime', 'stock', 'label_value']
 
-file_stock = 'psudo_sp500.csv'
+file_stock = 'psudo_stocktable.csv'
 stock_df = pd.read_csv(file_stock)
 stock_df = stock_df[stock_df['stock'].isin(stock_list)]
 
@@ -162,7 +161,7 @@ def calculate_avg(row, df):
     else:
         return None
 
-output_folder = 'correlation_matrices_sp500'
+output_folder = 'correlation_matrices_stocknet_new'
 os.makedirs(output_folder, exist_ok=True)
 
 correlation_matrices_only100 = {}
@@ -178,7 +177,7 @@ for current_date in unique_dates:
     correlation_matrices_only100[current_date] = correlation_matrix
     correlation_matrix.to_csv(f'{output_folder}/correlation_matrix_{current_date}.csv')
 
-with open(f'{output_folder}/correlation_matrices_sp500.pkl', 'wb') as f:
+with open(f'{output_folder}/correlation_matrices_stocknet_new.pkl', 'wb') as f:
     pickle.dump(correlation_matrices_only100, f)
 
 print("All correlation matrices have been saved in the folder.")
@@ -187,33 +186,35 @@ print("All correlation matrices have been saved in the folder.")
 # let merged_df only contain the stock in stock_list
 merged_df = merged_df[merged_df['stock'].isin(stock_list)]
 merged_df['calculated_avg'] = merged_df.apply(lambda row: calculate_avg(row, merged_df), axis=1)
-merged_df.to_csv('merged_df_with_calculated_sp500.csv', index=False)
-csv_file_path = 'merged_df_with_calculated_sp500.csv'
+merged_df.to_csv('merged_df_with_calculated_stocknet_new.csv', index=False)
+csv_file_path = 'merged_df_with_calculated_stocknet_new.csv'
 merged_df = pd.read_csv(csv_file_path)
 
 
 
-with open('correlation_matrices_sp500/correlation_matrices_sp500.pkl', 'rb') as f:
+with open('correlation_matrices_stocknet_new/correlation_matrices_stocknet_new.pkl', 'rb') as f:
     correlation_matrices = pickle.load(f)
 merged_df['datetime'] = pd.to_datetime(merged_df['datetime'])
 
-output_folder = 'graph_matrices_sp500'
+output_folder = 'graph_matrices_stocknet_new'
 os.makedirs(output_folder, exist_ok=True)
 graph_matrices_positive_dict = {}
 graph_matrices_negative_dict = {}
+
 
 for current_date in correlation_matrices:
     correlation_matrix = correlation_matrices[current_date]
     print(current_date)
     
+
     current_stocks = correlation_matrix.columns
-    
+
     selected_stocks = merged_df[
         (merged_df['datetime'] == current_date) & 
         (~merged_df['psudo_label'].isna())  
         # &(merged_df['calculated_avg'] != 0)
     ]['stock'].values
-
+    
     graph_matrix_positive = pd.DataFrame(0, index=current_stocks, columns=current_stocks)
     graph_matrix_negative = pd.DataFrame(0, index=current_stocks, columns=current_stocks)
     
@@ -235,6 +236,7 @@ for current_date in correlation_matrices:
             
             high_neg_corr_stocks = neg_corr_stocks[neg_corr_stocks < -0.6]
             if len(high_neg_corr_stocks) > 0:
+
                 if len(high_neg_corr_stocks[high_neg_corr_stocks < -0.8]) > 20:
                     high_neg_corr_stocks = high_neg_corr_stocks[high_neg_corr_stocks < -0.8]
                 else:
@@ -251,7 +253,7 @@ for current_date in correlation_matrices:
                     high_pos_corr_stocks = high_pos_corr_stocks.nlargest(20)
                 high_pos_corr_stocks = high_pos_corr_stocks[high_pos_corr_stocks > 0.72]
                 graph_matrix_positive.loc[stock, high_pos_corr_stocks.index] = 1
-
+            
             high_neg_corr_stocks = neg_corr_stocks[neg_corr_stocks < -0.65]
             if len(high_neg_corr_stocks) > 0:
                 if len(high_neg_corr_stocks[high_neg_corr_stocks < -0.8]) > 20:
@@ -260,30 +262,26 @@ for current_date in correlation_matrices:
                     high_neg_corr_stocks = high_neg_corr_stocks.nsmallest(20)
                 high_neg_corr_stocks = high_neg_corr_stocks[high_neg_corr_stocks < -0.65]
                 graph_matrix_negative.loc[stock, high_neg_corr_stocks.index] = 1
-    
 
     np.fill_diagonal(graph_matrix_positive.values, 1)
     np.fill_diagonal(graph_matrix_negative.values, 1)
 
-
     graph_matrix_positive.to_csv(f'{output_folder}/graph_matrix_positive_{current_date}.csv')
     graph_matrix_negative.to_csv(f'{output_folder}/graph_matrix_negative_{current_date}.csv')
-    
 
     graph_matrices_positive_dict[current_date] = graph_matrix_positive
     graph_matrices_negative_dict[current_date] = graph_matrix_negative
 
-
-with open(f'{output_folder}/graph_matrices_positive_500.pkl', 'wb') as f:
+with open(f'{output_folder}/graph_matrices_positive_55.pkl', 'wb') as f:
     pickle.dump(graph_matrices_positive_dict, f)
 
-with open(f'{output_folder}/graph_matrices_negative_500.pkl', 'wb') as f:
+with open(f'{output_folder}/graph_matrices_negative_55.pkl', 'wb') as f:
     pickle.dump(graph_matrices_negative_dict, f)
 
 print("Graph matrices (positive and negative) have been saved in both CSV files and the pickle files.")
 
 
-pkl_file_path = f'{output_folder}/graph_matrices_positive_500.pkl'
+pkl_file_path = f'{output_folder}/graph_matrices_positive_55.pkl'
 with open(pkl_file_path, 'rb') as f:
     correlation_matrices = pickle.load(f)
 
@@ -325,27 +323,10 @@ class AttentionGAT(torch.nn.Module):
         super(AttentionGAT, self).__init__()
         
         # 使用GCN替换GAT
-        # self.industry_conv1 = GCNConv(in_channels, hidden_channels)
-        # self.industry_conv2 = GCNConv(hidden_channels, out_channels)
-        # self.positive_corr_conv1 = GCNConv(in_channels, hidden_channels)
-        # self.positive_corr_conv2 = GCNConv(hidden_channels, out_channels)
-        
-        # # 第一次hop后的attention权重
-        # self.first_hop_attention = torch.nn.Parameter(torch.Tensor(2, hidden_channels))
-        # torch.nn.init.xavier_uniform_(self.first_hop_attention)
-        
-        # # 最终的attention权重
-        # self.attention_weight = torch.nn.Parameter(torch.Tensor(2, out_channels))
-        # torch.nn.init.xavier_uniform_(self.attention_weight)
-        
-        # self.mlp = torch.nn.Linear(out_channels, 1)
-
-
-        super(AttentionGAT, self).__init__()
-        self.industry_conv1 = GATConv(in_channels, hidden_channels, heads=heads)
-        self.industry_conv2 = GATConv(hidden_channels * 1, out_channels, heads=heads)
-        self.positive_corr_conv1 = GATConv(in_channels, hidden_channels, heads=heads)
-        self.positive_corr_conv2 = GATConv(hidden_channels * 1, out_channels, heads=heads)
+        self.industry_conv1 = GCNConv(in_channels, hidden_channels)
+        self.industry_conv2 = GCNConv(hidden_channels, out_channels)
+        self.positive_corr_conv1 = GCNConv(in_channels, hidden_channels)
+        self.positive_corr_conv2 = GCNConv(hidden_channels, out_channels)
         
         # 第一次hop后的attention权重
         self.first_hop_attention = torch.nn.Parameter(torch.Tensor(2, hidden_channels))
@@ -354,7 +335,24 @@ class AttentionGAT(torch.nn.Module):
         # 最终的attention权重
         self.attention_weight = torch.nn.Parameter(torch.Tensor(2, out_channels))
         torch.nn.init.xavier_uniform_(self.attention_weight)
+        
         self.mlp = torch.nn.Linear(out_channels, 1)
+
+
+        # super(AttentionGAT, self).__init__()
+        # self.industry_conv1 = GATConv(in_channels, hidden_channels, heads=heads)
+        # self.industry_conv2 = GATConv(hidden_channels * 1, out_channels, heads=heads)
+        # self.positive_corr_conv1 = GATConv(in_channels, hidden_channels, heads=heads)
+        # self.positive_corr_conv2 = GATConv(hidden_channels * 1, out_channels, heads=heads)
+        
+        # # 第一次hop后的attention权重
+        # self.first_hop_attention = torch.nn.Parameter(torch.Tensor(2, hidden_channels))
+        # torch.nn.init.xavier_uniform_(self.first_hop_attention)
+        
+        # # 最终的attention权重
+        # self.attention_weight = torch.nn.Parameter(torch.Tensor(2, out_channels))
+        # torch.nn.init.xavier_uniform_(self.attention_weight)
+        # self.mlp = torch.nn.Linear(out_channels, 1)
 
     # def forward(self, industry_data, pos_corr_data):
     #     # 第一次hop
@@ -403,6 +401,7 @@ class AttentionGAT(torch.nn.Module):
         return x
 
 model = AttentionGAT(in_channels=2, hidden_channels=48, out_channels=2).to(device)
+
 
 
 df_list = list(correlation_matrices.values())
@@ -469,14 +468,15 @@ def prepare_data(df_list):
 
 x_list, y_list, industry_edge_list, pos_corr_edge_list, acc_base_list, acc_mod_list, day_date_list = prepare_data(df_list)
 
+
+
+
 import pandas as pd
 
 day_date_series = pd.to_datetime(day_date_list)
 
-
-split_index_21 = (day_date_series <= '2021-01-01').sum()  
-split_index_22 = (day_date_series <= '2022-01-04').sum() 
-
+split_index_21 = (day_date_series <= '2021-01-01').sum()  # 训练集截止点
+split_index_22 = (day_date_series <= '2022-01-04').sum()  # 验证集截止点
 total_samples = len(day_date_list)
 
 total_samples = len(day_date_list)
@@ -518,6 +518,8 @@ def train(epoch):
         
         condition = x[:, -1] != 0
         # out = torch.where(condition, x[:, 2], out.squeeze())
+        
+        
         # loss=ic_loss(out, y)
         loss = F.l1_loss(out, y)
         total_loss += loss.item()
@@ -526,7 +528,7 @@ def train(epoch):
     return total_loss / len(train_data)
 
 def dump_predict_results(pred_series, y_series,long_short_r):
-        csv_dump_path = 'tmp/dump_result_sp500tmp'
+        csv_dump_path = 'tmp/dump_result_stocknettmp'
         os.makedirs(csv_dump_path, exist_ok=True)
         pred_df = pred_series.unstack()
         y_df = y_series.unstack()
@@ -536,7 +538,7 @@ def dump_predict_results(pred_series, y_series,long_short_r):
 
 
 def compute_validation_metrics(pred_series, y_series, psudo_series, pred_bce_series,quantile=0.1):
-    stock_list_nas = stock_list[:500]
+    stock_list_nas=stock_list[:55]
     mask = pred_series.index.get_level_values('instrument').isin(stock_list_nas)
     pred_series = pred_series[mask]
     y_series = y_series[mask]
@@ -656,6 +658,7 @@ def evaluate(valid_data,valid_idx,quantile= 0.1):
                 total_x_zero_output = indices_x_zero_output_nonzero.sum().item()
                 accuracy_x_zero_output_nonzero = correct_x_zero_output / total_x_zero_output if total_x_zero_output > 0 else None
 
+                
                 all_pred.append(out.cpu().numpy())
                 all_true.append(y.cpu().numpy())
                 unique_dates = merged_df['datetime'].unique()
@@ -717,21 +720,21 @@ def evaluate(valid_data,valid_idx,quantile= 0.1):
     return acc_1 / num_1, acc_2 / num_2, acc_3 / num_3, valid_metrics, valid_metrics_origin,valid_metrics_zero
     # return valid_metrics, valid_metrics_origin
 valid_ic_best = -0.5
-for epoch in range(50):
+for epoch in range(80):
     loss = train(epoch)
     if (epoch >= 0) and (epoch % 5) == 0:
         accuracy, acc_base, acc_mod, valid_metric_out, valid_metric_origin,valid_metric_zero = evaluate(valid_data=test_data,valid_idx=test_idx)
-        valid_ic = valid_metric_out['valid_ic']
+        valid_ic = valid_metric_out['acc_ic']
         if valid_ic >= valid_ic_best:
             valid_ic_best = valid_ic
             print('Best epoch: ',epoch)
-            torch.save(model.state_dict(), 'best_model_sp500.pth')
+            torch.save(model.state_dict(), 'best_model_stocknet_tmpgcn.pth')
         print(f'Validation Epoch {epoch}, Loss: {loss:.4f}, Accuracy1: {accuracy:.4f}')
         print('Output metrics: ', valid_metric_out)
         print('Zero metrics: ', valid_metric_zero)
 
-model.load_state_dict(torch.load('best_model_sp500.pth'))
-model.eval()  
+model.load_state_dict(torch.load('best_model_stocknet_tmpgcn.pth'))
+model.eval()  # 设置模型为评估模式
 print("Model loaded")
 accuracy, acc_base, acc_mod, valid_metric_out, valid_metric_origin,valid_metric_zero = evaluate(valid_data=valid_data,valid_idx=valid_idx,quantile= 0.1)
 print(f'Test information, Accuracy1: {accuracy:.4f}')

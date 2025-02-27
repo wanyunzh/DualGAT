@@ -471,14 +471,11 @@ def prepare_data(df_list):
 x_list, y_list, industry_edge_list, pos_corr_edge_list, acc_base_list, acc_mod_list, day_date_list = prepare_data(df_list)
 
 
-# 将原始日期列表转换为datetime格式
 day_date_series = pd.to_datetime(day_date_list)
 
-# 计算各时间段的分界索引（基于样本数量）
 split_index_21 = (day_date_series <= '2021-01-01').sum()  
 split_index_22 = (day_date_series <= '2022-01-04').sum()  
 
-# 计算各时间段样本比例
 total_samples = len(day_date_list)
 
 
@@ -521,7 +518,7 @@ def train(epoch):
         
         
         condition = x[:, -1] != 0
-        # out.squeeze() 的形状应为 [N]s
+        # out.squeeze()
         # out = torch.where(condition, x[:, 2], out.squeeze())
         #       
         # loss=ic_loss(out, y)
@@ -652,7 +649,7 @@ def evaluate(valid_data,valid_idx,quantile= 0.1):
 
                 # 3. x == 0 且 output_two_hop != 0 的位置
                 indices_x_zero_output_nonzero = (x == 0) & (out != 0)
-                
+
                 all_pred_zero.append(out[indices_x_zero_output_nonzero].cpu().numpy())
                 all_true_zero_y.append(y[indices_x_zero_output_nonzero].cpu().numpy())
 

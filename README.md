@@ -18,7 +18,7 @@ The code for our Temporal Pre-training Model can be found at [quantbench GitHub 
 
 - **expert_mining.py**: This script provides the expert prediction results used as pseudo labels in our study.
 
-### Stocktwits Database
+### Stocktwits Database AND OTHER DATASET
 
-- **Stocktwits_demo.zip**: This zip file contains a subset of our Stocktwits database. It includes examples of tweet messages and the information they contain, demonstrating the format used in our database.
+- **Stocktwits_demo.zip**: Since this paper is still under review, the dataset used in this paper will be public upon acceptance. The zip file contains a subset of our Stocktwits database. It includes examples of tweet messages and the information they contain, demonstrating the format used in our database. 
 
